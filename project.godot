@@ -21,6 +21,10 @@ window/size/viewport_width=648
 window/size/viewport_height=1152
 window/stretch/mode="viewport"
 
+[gui]
+
+theme/custom_font="uid://brdi4lofj7u3a"
+
 [input]
 
 Left={

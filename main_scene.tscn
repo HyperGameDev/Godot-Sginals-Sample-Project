@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjemrauyik1y2"]
+[gd_scene load_steps=12 format=3 uid="uid://cjemrauyik1y2"]
 
 [ext_resource type="Script" uid="uid://drv4o2r1ymydj" path="res://Player/player.gd" id="1_2c62f"]
 [ext_resource type="Texture2D" uid="uid://cgb8nbduvujaf" path="res://Player/cat.png" id="2_gyfs4"]
@@ -30,11 +30,14 @@ border_width_left = 8
 border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
-border_color = Color(0, 0.231373, 0.396078, 1)
+border_color = Color(0, 0.233333, 0.4, 0)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="FontVariation" id="FontVariation_2c62f"]
+spacing_glyph = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyfs4"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -114,31 +117,34 @@ split_offset = 275
 
 [node name="PanelContainer_Health" type="PanelContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_2c62f")
 
 [node name="VBox_HP" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Health"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = -22
 alignment = 1
 
 [node name="Label_HP" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Health/VBox_HP"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_colors/font_outline_color = Color(0, 0.231373, 0.396078, 1)
-theme_override_constants/outline_size = 31
-theme_override_font_sizes/font_size = 56
-text = "Health"
+theme_override_fonts/font = SubResource("FontVariation_2c62f")
+theme_override_font_sizes/font_size = 67
+text = "  Health  "
 horizontal_alignment = 1
 
 [node name="Label_HP_Val" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Health/VBox_HP"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_colors/font_outline_color = Color(0, 0.231373, 0.396078, 1)
-theme_override_constants/outline_size = 31
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 121
 text = "5"
 horizontal_alignment = 1
 
 [node name="PanelContainer_Strength" type="PanelContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gyfs4")
 
