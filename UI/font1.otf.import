@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://brdi4lofj7u3a"
-path="res://.godot/imported/TypeType - TTMilksCasualPie-Base.otf-b163ccdceca8114f5a8ffb0c3fb480be.fontdata"
+path="res://.godot/imported/font1.otf-abd4ecb99f719835209a8e0d7279920e.fontdata"
 
 [deps]
 
-source_file="res://UI/TypeType - TTMilksCasualPie-Base.otf"
-dest_files=["res://.godot/imported/TypeType - TTMilksCasualPie-Base.otf-b163ccdceca8114f5a8ffb0c3fb480be.fontdata"]
+source_file="res://UI/font1.otf"
+dest_files=["res://.godot/imported/font1.otf-abd4ecb99f719835209a8e0d7279920e.fontdata"]
 
 [params]
 
