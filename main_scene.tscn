@@ -1,28 +1,33 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjemrauyik1y2"]
+[gd_scene load_steps=15 format=3 uid="uid://cjemrauyik1y2"]
 
 [ext_resource type="Script" uid="uid://drv4o2r1ymydj" path="res://Player/player.gd" id="1_2c62f"]
 [ext_resource type="Texture2D" uid="uid://cgb8nbduvujaf" path="res://Player/cat.png" id="2_gyfs4"]
+[ext_resource type="Theme" uid="uid://dj4lcwuqbp0co" path="res://UI/ui.tres" id="3_8mm7a"]
+[ext_resource type="PackedScene" uid="uid://dpiovdx3uns0s" path="res://Pickup/fish.tscn" id="3_d5x1h"]
+[ext_resource type="PackedScene" uid="uid://c7jxhr1kn2ncx" path="res://Enemy/spiky.tscn" id="4_8mm7a"]
 
 [sub_resource type="Gradient" id="Gradient_d5x1h"]
-offsets = PackedFloat32Array(0.0454545, 0.253247, 0.564935, 0.74026, 0.850649)
-colors = PackedColorArray(0.651114, 0.684776, 0.789286, 1, 0.4784, 0.78016, 0.92, 1, 0, 0.561022, 0.956176, 1, 0.27451, 0.54902, 0, 1, 0.27451, 0.54902, 0, 1)
+offsets = PackedFloat32Array(0, 0.32906, 0.551282, 0.850649)
+colors = PackedColorArray(0.41, 0.941, 1, 1, 0, 0.693, 0.99, 1, 0.27451, 0.54902, 0, 1, 0.27451, 0.54902, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8mm7a"]
 gradient = SubResource("Gradient_d5x1h")
 fill_to = Vector2(0, 1)
+metadata/_snap_count = 12
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hq1ik"]
 
 [sub_resource type="Gradient" id="Gradient_nfk4m"]
-offsets = PackedFloat32Array(0, 0.167401, 0.281938, 1)
-colors = PackedColorArray(0.286177, 0.563103, 0, 1, 0.0980392, 0.270588, 0.0235294, 1, 0.407843, 0.176471, 0.0352941, 1, 0.6, 0.3403, 0.282, 1)
+offsets = PackedFloat32Array(0, 0.140969, 0.281938, 0.881057)
+colors = PackedColorArray(0.286275, 0.639216, 0, 1, 0.081, 0.27, 0, 1, 0.407843, 0.176471, 0.0352941, 1, 0.6, 0.3403, 0.282, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_66tet"]
 gradient = SubResource("Gradient_nfk4m")
 fill_to = Vector2(0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ycvg"]
-size = Vector2(248, 200)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d5x1h"]
+radius = 101.0
+height = 226.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c62f"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -62,6 +67,7 @@ offset_bottom = 1152.0
 texture = SubResource("GradientTexture2D_8mm7a")
 
 [node name="StaticBody2D_Ground" type="StaticBody2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape2D_Ground" type="CollisionShape2D" parent="StaticBody2D_Ground"]
 position = Vector2(320, 520)
@@ -79,7 +85,8 @@ script = ExtResource("1_2c62f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-4, -4)
-shape = SubResource("RectangleShape2D_7ycvg")
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_d5x1h")
 
 [node name="TextureRect_Sprite" type="TextureRect" parent="CharacterBody2D"]
 unique_name_in_owner = true
@@ -99,9 +106,9 @@ pivot_offset = Vector2(128, 128)
 texture = ExtResource("2_gyfs4")
 expand_mode = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer_HUD" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer_Top" type="MarginContainer" parent="CanvasLayer_HUD"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 112.0
@@ -110,22 +117,20 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 20
 
-[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer_HUD/MarginContainer_Top"]
 layout_mode = 2
-theme_override_constants/separation = 50
-split_offset = 275
 
-[node name="PanelContainer_Health" type="PanelContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
+[node name="PanelContainer_Health" type="PanelContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_2c62f")
 
-[node name="VBox_HP" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Health"]
+[node name="VBox_HP" type="VBoxContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Health"]
 layout_mode = 2
 theme_override_constants/separation = -22
 alignment = 1
 
-[node name="Label_HP" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Health/VBox_HP"]
+[node name="Label_HP" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_colors/font_outline_color = Color(0, 0.231373, 0.396078, 1)
@@ -134,7 +139,7 @@ theme_override_font_sizes/font_size = 67
 text = "  Health  "
 horizontal_alignment = 1
 
-[node name="Label_HP_Val" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Health/VBox_HP"]
+[node name="Label_HP_Val" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
@@ -143,17 +148,17 @@ theme_override_font_sizes/font_size = 121
 text = "5"
 horizontal_alignment = 1
 
-[node name="PanelContainer_Strength" type="PanelContainer" parent="CanvasLayer/MarginContainer/HSplitContainer"]
+[node name="PanelContainer_Strength" type="PanelContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gyfs4")
 
-[node name="VBox_Strength" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Strength"]
+[node name="VBox_Strength" type="VBoxContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Strength"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label_Strength" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
+[node name="Label_Strength" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.41, 0.0533, 0.041, 1)
 theme_override_constants/outline_size = 31
@@ -161,7 +166,7 @@ theme_override_font_sizes/font_size = 56
 text = "Strength"
 horizontal_alignment = 1
 
-[node name="Label_Strength_Val" type="Label" parent="CanvasLayer/MarginContainer/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
+[node name="Label_Strength_Val" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.41, 0.0533, 0.041, 1)
@@ -169,3 +174,43 @@ theme_override_constants/outline_size = 31
 theme_override_font_sizes/font_size = 56
 text = "1"
 horizontal_alignment = 1
+
+[node name="MarginContainer_Bottom" type="MarginContainer" parent="CanvasLayer_HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -106.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 425
+
+[node name="HSplit" type="HSplitContainer" parent="CanvasLayer_HUD/MarginContainer_Bottom"]
+layout_mode = 2
+theme_override_constants/separation = 30
+split_offset = 285
+dragging_enabled = false
+
+[node name="Button" type="Button" parent="CanvasLayer_HUD/MarginContainer_Bottom/HSplit"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_8mm7a")
+theme_override_font_sizes/font_size = 81
+text = "   Fish   "
+
+[node name="Button2" type="Button" parent="CanvasLayer_HUD/MarginContainer_Bottom/HSplit"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_8mm7a")
+theme_override_font_sizes/font_size = 81
+text = " Spiky "
+
+[node name="RigidBody2D" parent="." instance=ExtResource("3_d5x1h")]
+position = Vector2(110, 421)
+collision_layer = 0
+
+[node name="RigidBody2D2" parent="." instance=ExtResource("4_8mm7a")]
+position = Vector2(572, 382)
+collision_layer = 0
