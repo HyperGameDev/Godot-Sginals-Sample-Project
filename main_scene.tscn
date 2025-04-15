@@ -134,12 +134,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_2c62f")
 
-[node name="VBox_HP" type="VBoxContainer" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health"]
+[node name="VBox_Lives" type="VBoxContainer" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health"]
 layout_mode = 2
 theme_override_constants/separation = -22
 alignment = 1
 
-[node name="Label_HP" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
+[node name="Label_Lives" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_Lives"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_colors/font_outline_color = Color(0, 0.231373, 0.396078, 1)
@@ -148,7 +148,7 @@ theme_override_font_sizes/font_size = 67
 text = "  LIVES  "
 horizontal_alignment = 1
 
-[node name="Label_HP_Val" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
+[node name="Label_Lives_Val" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_Lives"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
