@@ -1,0 +1,145 @@
+<short> You should really be using signals in Godot!
+
+Let's use signals to make this wandering cat have a more exciting life.</short>
+
+<video> Signals are (use graphic to explain signals), so let's look at some simple and more advanced use cases for isgnals in Godot.</video>
+
+First, let's make a button that spawns an enemy.
+
+Type in some text. Add a fancy theme.
+
+Nice, but the button doesn't do anything yet, so let's connect a signal from the button.
+
+I'll click the Button Node and Switch to the Node tab.
+Here we see all of the signals
+that this Node can emit.
+
+Let's right click "pressed", and choose connect. This CanvasLayer Node has the script that I want to connect my signal to,
+so let's choose it and press Connect.
+
+And voila! It's connected.
+
+In this connected function, I'll add some premade code to spawn an enemy, and... 
+
+Now, the button spawns a spiky enemy!
+
+<short> But there is so much that signals can do, so check out the full video below to learn more.</short>
+
+But it's not very exciting, because nothing happens when it touches the cat.
+
+Signals can help us out here, too.
+
+On the cat, I'll add an Area2D to help detect the spiky enemy.
+
+Give it some collision.
+
+I'll make a reference to the area
+in the cat's script
+
+And this time, let's connect the Node's signal manually through code,
+instead of through the editor.
+
+First, I'll create ready function.
+And I'll fetch the signal we want from Area2D,
+which in this case body_entered,
+and I'll connect it to a function.
+
+I'll type out the function,
+and since it calls with an argument,
+"body",
+let's include that too.
+
+If body is Enemy,
+let's say "queue_free()" which on contact,
+will make...
+the cat disappear! Nice
+
+But this cat is supposed to have 9 lives.
+
+So let's get even more advanced with our signals,
+to change the number of lives.
+
+To communicate this collision 
+to my UI,
+I'm going to create a Signal Bus
+that exists outside of the main scene's node tree.
+
+It's called an Autoload,
+and it means that anything in the project
+can access its script at any time.
+
+In this new script,
+let's create a custom signal
+
+I'll call it bonk
+
+Now, instead of deleting the Cat on collision,
+let's emit the bonk signal from our SignalBus.
+
+But remember, for our signal to matter,
+it has to be connected to something.
+
+On the UI script,
+let's receive the bonk signal from the SignalBus, in its ready function, and
+connect it to its own function
+"_on_bonk"
+
+When the function runs,
+I'll subtract 1 life
+from the lives value
+
+Let's test it
+
+Perfect!
+
+Now that we have a custom signal
+that can be accessed from anywhere,
+let's connect bonk on the Cat too
+
+Right beneath the body_entered signal from before
+
+I'll give it its own _on_bonk function
+
+Make it do something...
+In this case, let's make the cat flash red
+
+It's looking good,
+but 
+what if we want to drop something healthy
+on the cat's head?
+
+By including extra information
+when we emit the bonk signal,
+we can check what it is that bonked on the cat
+
+I'll send "body" from before
+along with the signal when it emits
+
+and move the body checking code
+to the _on_bonk function that receives the signal
+
+if body is enemy, make it red
+
+if it's let's say fish
+make it blue
+
+Then in each 
+
+I'll need to update _on_bonk on the UI too
+
+have receive body
+if Body is enemy, subtract health
+
+if fish, add health
+
+Finally, I'll add one more button
+
+Call it fish
+
+Connect it 
+
+Add the spawn code
+
+And our cat's adventure is a little more interesting
+thanks to signals 
+that you now know how to connect and emit!
