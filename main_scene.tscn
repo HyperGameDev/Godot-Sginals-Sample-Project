@@ -87,16 +87,16 @@ offset_right = 648.0
 offset_bottom = 1152.0
 texture = SubResource("GradientTexture2D_66tet")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D_Cat" type="CharacterBody2D" parent="."]
 position = Vector2(288, 440)
 script = ExtResource("1_2c62f")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D_Cat"]
 position = Vector2(-4, -4)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_d5x1h")
 
-[node name="TextureRect_Sprite" type="TextureRect" parent="CharacterBody2D"]
+[node name="TextureRect_Sprite" type="TextureRect" parent="CharacterBody2D_Cat"]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
