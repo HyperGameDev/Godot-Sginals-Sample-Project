@@ -1,10 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjemrauyik1y2"]
+[gd_scene load_steps=14 format=3 uid="uid://cjemrauyik1y2"]
 
 [ext_resource type="Script" uid="uid://drv4o2r1ymydj" path="res://Player/player.gd" id="1_2c62f"]
 [ext_resource type="Texture2D" uid="uid://cgb8nbduvujaf" path="res://Player/cat.png" id="2_gyfs4"]
-[ext_resource type="Theme" uid="uid://dj4lcwuqbp0co" path="res://UI/ui.tres" id="3_8mm7a"]
-[ext_resource type="PackedScene" uid="uid://dpiovdx3uns0s" path="res://Pickup/fish.tscn" id="3_d5x1h"]
-[ext_resource type="PackedScene" uid="uid://c7jxhr1kn2ncx" path="res://Enemy/spiky.tscn" id="4_8mm7a"]
+[ext_resource type="Script" uid="uid://b14c0oh15hq8o" path="res://ui.gd" id="3_hq1ik"]
 
 [sub_resource type="Gradient" id="Gradient_d5x1h"]
 offsets = PackedFloat32Array(0, 0.32906, 0.551282, 0.850649)
@@ -26,8 +24,12 @@ gradient = SubResource("Gradient_nfk4m")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d5x1h"]
-radius = 101.0
-height = 226.0
+radius = 84.0
+height = 184.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8mm7a"]
+radius = 84.0
+height = 216.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c62f"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -80,7 +82,7 @@ offset_bottom = 1152.0
 texture = SubResource("GradientTexture2D_66tet")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(336, 424)
+position = Vector2(480, 440)
 script = ExtResource("1_2c62f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -101,14 +103,22 @@ offset_right = 128.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(-1, 1)
+scale = Vector2(-0.798697, 0.798697)
 pivot_offset = Vector2(128, 128)
 texture = ExtResource("2_gyfs4")
 expand_mode = 1
 
-[node name="CanvasLayer_HUD" type="CanvasLayer" parent="."]
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
 
-[node name="MarginContainer_Top" type="MarginContainer" parent="CanvasLayer_HUD"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-4, -4)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_8mm7a")
+
+[node name="CanvasLayer_UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_hq1ik")
+
+[node name="MarginContainer_Top" type="MarginContainer" parent="CanvasLayer_UI"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 112.0
@@ -117,48 +127,48 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 20
 
-[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer_HUD/MarginContainer_Top"]
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer_UI/MarginContainer_Top"]
 layout_mode = 2
 
-[node name="PanelContainer_Health" type="PanelContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer"]
+[node name="PanelContainer_Health" type="PanelContainer" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_2c62f")
 
-[node name="VBox_HP" type="VBoxContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Health"]
+[node name="VBox_HP" type="VBoxContainer" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health"]
 layout_mode = 2
 theme_override_constants/separation = -22
 alignment = 1
 
-[node name="Label_HP" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
+[node name="Label_HP" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_colors/font_outline_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_fonts/font = SubResource("FontVariation_2c62f")
 theme_override_font_sizes/font_size = 67
-text = "  Health  "
+text = "  LIVES  "
 horizontal_alignment = 1
 
-[node name="Label_HP_Val" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
+[node name="Label_HP_Val" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Health/VBox_HP"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_colors/font_outline_color = Color(0, 0.231373, 0.396078, 1)
 theme_override_font_sizes/font_size = 121
-text = "5"
+text = "9"
 horizontal_alignment = 1
 
-[node name="PanelContainer_Strength" type="PanelContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer"]
+[node name="PanelContainer_Strength" type="PanelContainer" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gyfs4")
 
-[node name="VBox_Strength" type="VBoxContainer" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Strength"]
+[node name="VBox_Strength" type="VBoxContainer" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Strength"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label_Strength" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
+[node name="Label_Strength" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.41, 0.0533, 0.041, 1)
 theme_override_constants/outline_size = 31
@@ -166,7 +176,7 @@ theme_override_font_sizes/font_size = 56
 text = "Strength"
 horizontal_alignment = 1
 
-[node name="Label_Strength_Val" type="Label" parent="CanvasLayer_HUD/MarginContainer_Top/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
+[node name="Label_Strength_Val" type="Label" parent="CanvasLayer_UI/MarginContainer_Top/HSplitContainer/PanelContainer_Strength/VBox_Strength"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.41, 0.0533, 0.041, 1)
@@ -175,7 +185,7 @@ theme_override_font_sizes/font_size = 56
 text = "1"
 horizontal_alignment = 1
 
-[node name="MarginContainer_Bottom" type="MarginContainer" parent="CanvasLayer_HUD"]
+[node name="MarginContainer_Bottom" type="MarginContainer" parent="CanvasLayer_UI"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -187,30 +197,8 @@ theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 425
 
-[node name="HSplit" type="HSplitContainer" parent="CanvasLayer_HUD/MarginContainer_Bottom"]
+[node name="HSplit" type="HSplitContainer" parent="CanvasLayer_UI/MarginContainer_Bottom"]
 layout_mode = 2
 theme_override_constants/separation = 30
 split_offset = 285
 dragging_enabled = false
-
-[node name="Button" type="Button" parent="CanvasLayer_HUD/MarginContainer_Bottom/HSplit"]
-layout_mode = 2
-focus_mode = 0
-theme = ExtResource("3_8mm7a")
-theme_override_font_sizes/font_size = 81
-text = "   Fish   "
-
-[node name="Button2" type="Button" parent="CanvasLayer_HUD/MarginContainer_Bottom/HSplit"]
-layout_mode = 2
-focus_mode = 0
-theme = ExtResource("3_8mm7a")
-theme_override_font_sizes/font_size = 81
-text = " Spiky "
-
-[node name="RigidBody2D" parent="." instance=ExtResource("3_d5x1h")]
-position = Vector2(110, 421)
-collision_layer = 0
-
-[node name="RigidBody2D2" parent="." instance=ExtResource("4_8mm7a")]
-position = Vector2(572, 382)
-collision_layer = 0

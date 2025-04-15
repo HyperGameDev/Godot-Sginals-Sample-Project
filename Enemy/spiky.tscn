@@ -7,8 +7,8 @@
 radius = 66.0681
 
 [node name="RigidBody2D" type="RigidBody2D"]
-contact_monitor = true
-max_contacts_reported = 2
+can_sleep = false
+max_contacts_reported = 10
 script = ExtResource("1_xynt2")
 
 [node name="TextureRect" type="TextureRect" parent="."]

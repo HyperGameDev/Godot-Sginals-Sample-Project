@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@onready var area_2d: Area2D = $Area2D
 @onready var sprite: TextureRect = %TextureRect_Sprite
 
 
@@ -15,7 +16,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	var direction := Input.get_axis("Left", "Right")
@@ -27,13 +28,13 @@ func _physics_process(delta: float) -> void:
 			if not flipping:
 				flipping = true
 				var tween = create_tween()
-				tween.tween_property(sprite, "scale:x", -1., .2)
+				tween.tween_property(sprite, "scale:x", -.799, .2)
 				tween.finished.connect(_on_flip_finished)
 		else:
 			if not flipping:
 				flipping = true
 				var tween = create_tween()
-				tween.tween_property(sprite, "scale:x", 1., .2)
+				tween.tween_property(sprite, "scale:x", .799, .2)
 				tween.finished.connect(_on_flip_finished)
 			
 	else:

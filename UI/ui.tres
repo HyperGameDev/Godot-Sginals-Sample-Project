@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dj4lcwuqbp0co"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dj4lcwuqbp0co"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mko1r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mm7a"]
 bg_color = Color(0.878341, 0.243888, 0.615631, 1)
@@ -33,6 +35,8 @@ shadow_color = Color(0.0495693, 3.98282e-06, 0.276384, 1)
 shadow_offset = Vector2(7, 10)
 
 [resource]
+Button/font_sizes/font_size = 81
+Button/styles/focus = SubResource("StyleBoxEmpty_mko1r")
 Button/styles/hover = SubResource("StyleBoxFlat_8mm7a")
 Button/styles/normal = SubResource("StyleBoxFlat_d5x1h")
 Button/styles/pressed = SubResource("StyleBoxFlat_hq1ik")
