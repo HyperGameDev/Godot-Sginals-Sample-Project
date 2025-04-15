@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjemrauyik1y2"]
+[gd_scene load_steps=13 format=3 uid="uid://cjemrauyik1y2"]
 
 [ext_resource type="Script" uid="uid://drv4o2r1ymydj" path="res://Player/player.gd" id="1_2c62f"]
 [ext_resource type="Texture2D" uid="uid://cgb8nbduvujaf" path="res://Player/cat.png" id="2_gyfs4"]
@@ -26,10 +26,6 @@ fill_to = Vector2(0, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d5x1h"]
 radius = 84.0
 height = 184.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8mm7a"]
-radius = 84.0
-height = 216.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c62f"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -107,13 +103,6 @@ scale = Vector2(-0.798697, 0.798697)
 pivot_offset = Vector2(128, 128)
 texture = ExtResource("2_gyfs4")
 expand_mode = 1
-
-[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
-position = Vector2(-4, -4)
-rotation = -1.57079
-shape = SubResource("CapsuleShape2D_8mm7a")
 
 [node name="CanvasLayer_UI" type="CanvasLayer" parent="."]
 script = ExtResource("3_hq1ik")

@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-@onready var area_2d: Area2D = $Area2D
 @onready var sprite: TextureRect = %TextureRect_Sprite
 
 
